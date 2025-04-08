@@ -1,7 +1,7 @@
 pipeline {
     agent any
 
-    stage
+    stages {
         stage('Cloning github repo') {
             steps {
                 checkout scmGit(branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/harikesh0402/Terraform-Automation.git']])
@@ -12,7 +12,7 @@ pipeline {
              steps {
                  sh ("terraform init -reconfigure") 
              }
-         }
+        }
         
         stage ("terraform Plan") {
             steps {
@@ -25,6 +25,3 @@ pipeline {
                 echo "Terraform action is --> ${action}"
                 sh ('terraform ${action} --auto-approve') 
            }
-        }
-    }
-}
