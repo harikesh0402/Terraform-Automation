@@ -7,13 +7,12 @@ pipeline {
                 checkout scmGit(branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/harikesh0402/Terraform-Automation.git']])
             }
         }
-    }
     
          stage ("terraform init") {
              steps {
                  sh ("terraform init -reconfigure") 
              }
-        }
+         }
         
         stage ("terraform Plan") {
             steps {
@@ -27,4 +26,5 @@ pipeline {
                 sh ('terraform ${action} --auto-approve') 
            }
         }
+    }
 }
